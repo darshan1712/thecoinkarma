@@ -55,10 +55,10 @@ public class UserController {
 	}
 	
 	//DELETE - delete user
-	@DeleteMapping("/{userId}")
-	public ResponseEntity<?> deleteUser(@PathVariable("userId") Integer uId){
-		this.userService.deleteUser(uId);
-		return new ResponseEntity<ApiResponse>(new ApiResponse("User deleted Successfully", true), HttpStatus.OK);
-	}
+//	@DeleteMapping("/{userId}")
+//	public ResponseEntity<?> deleteUser(@PathVariable("userId") Integer uId){
+//		this.userService.deleteUser(uId);
+//		return new ResponseEntity<ApiResponse>(new ApiResponse("User deleted Successfully", true), HttpStatus.OK);
+//	}
 
 }
