@@ -3,6 +3,8 @@ package com.thecoinkarma.blog.controllers;
 import java.util.List;
 import java.util.Map;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -38,18 +40,20 @@ public class UserController {
 	public ResponseEntity<UserDto> getUserById(@PathVariable Integer userId){
 		UserDto userById = this.userService.getUserById(userId);
 		return ResponseEntity.ok(userById);
+		//here above we have directly used ResponseEntity.ok without using "new ResponseEntity" object as used in other object
+
 	}
 	
 	//POST - create user
 	@PostMapping("/")
-	public ResponseEntity<UserDto> createUser(@RequestBody UserDto userDto) {
+	public ResponseEntity<UserDto> createUser(@Valid @RequestBody UserDto userDto) {
 		UserDto createuserDto = this.userService.createUser(userDto);
 		return new ResponseEntity<>(createuserDto, HttpStatus.CREATED);
 	}
 	
 	//PUT - update user
 	@PutMapping("/{userId}")
-	public ResponseEntity<UserDto> updateUser(@RequestBody UserDto userDto, @PathVariable("userId") Integer uId){
+	public ResponseEntity<UserDto> updateUser(@Valid @RequestBody UserDto userDto, @PathVariable("userId") Integer uId){
 		UserDto updatedUserDto = this.userService.updateUser(userDto, uId);
 		return new ResponseEntity<>(updatedUserDto, HttpStatus.OK);
 	}
