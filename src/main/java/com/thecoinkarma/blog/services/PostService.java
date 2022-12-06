@@ -4,6 +4,7 @@ import java.util.List;
 
 import com.thecoinkarma.blog.entity.Post;
 import com.thecoinkarma.blog.payloads.PostDto;
+import com.thecoinkarma.blog.payloads.PostResponse;
 
 public interface PostService {
 
@@ -17,7 +18,7 @@ public interface PostService {
 	void deletePost(Integer postId);
 	
 	//getAll
-	List<PostDto> getAllPost();
+	PostResponse getAllPost(Integer pageNumber, Integer pageSize, String sortBy, String sortDir);
 	
 	//get
 	PostDto getPostById(Integer postId);

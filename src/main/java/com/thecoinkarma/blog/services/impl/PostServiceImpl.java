@@ -7,6 +7,10 @@ import java.util.stream.Collectors;
 
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import com.thecoinkarma.blog.entity.Category;
@@ -14,6 +18,7 @@ import com.thecoinkarma.blog.entity.Post;
 import com.thecoinkarma.blog.entity.User;
 import com.thecoinkarma.blog.exceptions.ResourceNotFoundException;
 import com.thecoinkarma.blog.payloads.PostDto;
+import com.thecoinkarma.blog.payloads.PostResponse;
 import com.thecoinkarma.blog.repositories.CategoryRepo;
 import com.thecoinkarma.blog.repositories.PostRepo;
 import com.thecoinkarma.blog.repositories.UserRepo;
@@ -75,13 +80,28 @@ public class PostServiceImpl implements PostService {
 	}
 
 	@Override
-	public List<PostDto> getAllPost() {
-		List<Post> postList = this.postRepo.findAll();
+	public PostResponse getAllPost(Integer pageNumber, Integer pageSize, String sortBy, String sortDir) {
+		
+		Sort sort = (sortDir.equalsIgnoreCase("asc")) ? Sort.by(sortBy).ascending() : Sort.by(sortBy).descending();
+		
+		Pageable p = PageRequest.of(pageNumber, pageSize, sort);
+		
+		 Page<Post> pagePost = this.postRepo.findAll(p);
+		 
+		 List<Post> postList = pagePost.getContent();
 	
 		List<PostDto> postDtoList = postList.stream().map((post) -> this.modelMapper.map(post, PostDto.class))
 				.collect(Collectors.toList());
 		
-		return postDtoList;
+		PostResponse postResponse = new PostResponse();
+		
+		postResponse.setContent(postDtoList);
+		postResponse.setPageNumber(pagePost.getNumber());
+		postResponse.setPageSize(pagePost.getSize());
+		postResponse.setTotalPages(pagePost.getTotalPages());
+		postResponse.setTotalElements(pagePost.getTotalElements());
+		
+		return postResponse;
 	}
 
 	@Override
