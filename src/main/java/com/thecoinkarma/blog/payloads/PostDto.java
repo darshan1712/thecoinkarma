@@ -1,12 +1,15 @@
 package com.thecoinkarma.blog.payloads;
 
 import java.util.Date;
+import java.util.HashSet;
+import java.util.Set;
 
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Size;
 
 import com.thecoinkarma.blog.entity.Category;
+import com.thecoinkarma.blog.entity.Comment;
 import com.thecoinkarma.blog.entity.User;
 
 import lombok.Getter;
@@ -35,4 +38,6 @@ public class PostDto {
 	private CategoryDto category;
 	
 	private UserDto user;
+	
+	private Set<CommentDto> comments = new HashSet<>();
 }

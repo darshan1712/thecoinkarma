@@ -66,6 +66,7 @@ public class PostServiceImpl implements PostService {
 //		updatePostDto.setUser(user);
 //		updatePostDto.setCategory(category);
 		post.setTitle(postDto.getTitle());
+		post.setImageName(postDto.getImageName());
 		post.setContent(postDto.getContent());
 
 		
