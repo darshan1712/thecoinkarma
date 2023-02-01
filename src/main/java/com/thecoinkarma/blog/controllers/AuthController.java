@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.thecoinkarma.blog.exceptions.ApiException;
 import com.thecoinkarma.blog.payloads.JwtAuthRequest;
 import com.thecoinkarma.blog.security.JwtAuthResponse;
 import com.thecoinkarma.blog.security.JwtTokenHelper;
@@ -54,7 +55,7 @@ public class AuthController
 			this.authenticationManager.authenticate(authenticationToken);
 		} catch (BadCredentialsException e) {
 			System.out.println("Invalid Details !!");
-			throw new Exception("invalid username or password!!!!");
+			throw new ApiException("invalid username or password!!!!");
 		}
 		
 	}
