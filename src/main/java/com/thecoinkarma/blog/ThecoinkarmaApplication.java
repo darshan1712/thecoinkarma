@@ -25,9 +25,9 @@ public class ThecoinkarmaApplication implements CommandLineRunner
 		return new ModelMapper();
 	}
 
-//	@Override
-//	public void run(String... args) throws Exception {
-//		// TODO Auto-generated method stub
-//		System.out.println(this.passwordEncoder.encode("darshan123"));
-//	}
+	@Override
+	public void run(String... args) throws Exception {
+		// TODO Auto-generated method stub
+		System.out.println(this.passwordEncoder.encode("darshan123"));
+	}
 }
