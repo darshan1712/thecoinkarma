@@ -6,6 +6,8 @@ import com.thecoinkarma.blog.payloads.UserDto;
 
 public interface UserService {
 	
+	UserDto registerNewUser(UserDto userDto);
+	
 	UserDto createUser(UserDto user);
 	
 	UserDto getUserById(Integer userId);
